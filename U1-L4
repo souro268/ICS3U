@@ -1,0 +1,5 @@
+num1 = input("PLease enter a whole number: ")
+num1 = int(num1)
+num2 = input("Please enter another whole number to be the devisor: ")
+num2 = int(num2)
+print("When", str(num1), "is divided by", str(num2), "the result is:", str(num / num2))
