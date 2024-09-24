@@ -1,19 +1,16 @@
-#
-
-
 import math as m
 
 #1:
 print("1")
 print("********************************************************************************")
 print("calculating the area of a rectangle.")
-lengthR = float(input("Please enter the length of the rectangle: ")) #user input for length of rectangle
-wigthR = float(input("Please enter the wigth of the rectangle: ")) #user input for wigth of rectangle
+lengthR = float(input("Please enter the length of the rectangle: "))
+wigthR = float(input("Please enter the wigth of the rectangle: "))
 
 
-areaR = lengthR * wigthR # multiples the length and wigth 
+areaR = lengthR * wigthR
 print("--------------------------------------------------------------------------------")
-print("The area of the rectangle is: %.2f" % areaR) # prints the area with 2 decmial places
+print("The area of the rectangle is: %.2f" % areaR)
 print("--------------------------------------------------------------------------------")
  
 
@@ -22,10 +19,10 @@ print("-------------------------------------------------------------------------
 print("2")
 print("********************************************************************************")
 print("calculating the area of a circle.")
-R = float(input("Please enter the radius of the circle: ")) # user input for the radius of a cirlce
-areaC = m.pi * m.pow(R, 2) # fnds the area of the cirlce using raduis
+R = float(input("Please enter the radius of the circle: "))
+areaC = m.pi * m.pow(R, 2)
 print("--------------------------------------------------------------------------------")
-print("The area is: %.2f" % areaC) # prints the area with 2 decimal places
+print("The area is: %.2f" % areaC)
 print("--------------------------------------------------------------------------------")
 
 
@@ -34,30 +31,29 @@ print("-------------------------------------------------------------------------
 print("3")
 print("********************************************************************************")
 print("calculating the volume of a cylinder.")
-CylinderR = float(input("Please enter the radius of the cylinder: ")) # user imput for the raduis of the cylinder
-CylinderH = float(input("Please enter the height of the cylinder: ")) # user imput for the height of the cylinder
-volumeCy = m.pi * (m.pow(CylinderR, 2) * CylinderH) # finds the volume of the cylinder using height and raduis
+CylinderR = float(input("Please enter the radius of the cylinder: "))
+CylinderH = float(input("Please enter the height of the cylinder: "))
+volumeCy = m.pi * (m.pow(CylinderR, 2) * CylinderH)
 print("--------------------------------------------------------------------------------")
-print("The volume of the cylinder is %.2f" % volumeCy) # finds the volume of the cylinder with 2 decmial places
+print("The volume of the cylinder is %.2f" % volumeCy)
 print("--------------------------------------------------------------------------------")
-circle = 2 * (m.pi * m.pow(CylinderR, 2)) # finds the area of the top and bottom cirlces
-sides = 2 * m.pi * CylinderR * CylinderH # finds the side suface area (2piRH)
-SA = circle + sides # adds the circle area and side areas together
+circle = 2 * (m.pi * m.pow(CylinderR, 2))
+sides = 2 * m.pi * CylinderR * CylinderH
+SA = circle + sides
 print("--------------------------------------------------------------------------------")
-print("The suface area of the cylinder is: %.2f" % SA) # finds the suface area of the cylinder with 2 decmial places
+print("The suface area of the cylinder is: %.2f" % SA)
 print("--------------------------------------------------------------------------------")
-
 
 
 
 #4
 print("4")
 print("********************************************************************************")
-periodL = float(input("Please enter the length of the pendulum: ")) # user input for the length of the pendulum
-periodG = 9.8 # g = 9.8
-sqrt = m.sqrt(periodL / periodG) # calculates the square root parts
+periodL = float(input("Please enter the length of the pendulum: "))
+periodG = 9.8
+sqrt = m.sqrt(periodL / periodG)
 print("--------------------------------------------------------------------------------")
-print("The time it takes for 1 swing will take %.2f" % (sqrt * (2 * m.pi))) # prints the square root multipled by 2pi and gives output with 2 decmial places
+print("The time it takes for 1 swing will take %.2f" % (sqrt * (2 * m.pi)))
 print("--------------------------------------------------------------------------------")
 print("********************************************************************************")
 
