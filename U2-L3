@@ -1,0 +1,26 @@
+num = 0
+n = 1
+y = 2
+while(num < 6):
+
+    if(n == 1):
+        print("The 1 th ", "triangular number is ", n, sep="")
+    elif(n == 3):
+        print("The 2 th ", "triangular number is ", n, sep="")
+    elif(n == 6):
+        print("The 3 th ", "triangular number is ", n, sep="")
+    elif(n == 10):
+        print("The 4 th ", "triangular number is ", n, sep="")
+    elif(n == 15):
+        print("The 5 th ", "triangular number is ", n, sep="")
+    elif(n == 21):
+        print("The 6 th ", "triangular number is ", n, sep="")
+    
+    n = n + y
+    y += 1
+    num += 1
+        
+    
+  
+    
+
