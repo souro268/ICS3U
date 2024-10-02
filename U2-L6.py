@@ -1,53 +1,36 @@
+# Modify 1: Inverted right-angled triangle
+# Prompting user for input on how many rows the triangle should have
+n = int(input("Enter the number of rows for the first triangle: "))
+print("Modify 1: Inverted Triangle")
 
-#count = int(input("Enter nunber: "))
-count = 15
+# Loop to print inverted triangle
+for i in range(n, 0, -1):  # Starts at n, decrements down to 1
+    print("#" * i)  # Prints '#' multiplied by the current value of i
 
-for i in range(1, count, 2):
-    x = "*"
-    b = " "
-    x = x * (i * 2)
-    b = b * count
-  
-    print(b*i, end = f"{x+(x*(x*i))}")
-    count -= 2
+print("\nModify 2: Pyramid Shape")
+# Modify 2: Pyramid Shape
+# Prompting user for input on how many rows the pyramid should have
+n = int(input("Enter the number of rows for the second triangle (pyramid): "))
 
-count = 15
-lock = count
-for j in range(count, -1, -1):
-    
-    y = "*"
-    a = " "
-    a = a * (count - (lock - 1))
-    y = y * (j * 2)
-    count += 1
-    print(f"{a} {y} {a}")
+# Loop to print pyramid
+for i in range(1, n + 1):  # Starts at 1, increments up to n
+    spaces = n - i  # Calculates the number of spaces for padding on the left
+    hashes = 2 * i - 1  # Calculates the number of '#' characters to print
+    print(" " * spaces + "#" * hashes)  # Prints spaces followed by hashes
 
+print("\nModify 3: Diamond Shape")
+# Modify 3: Diamond Shape
+# Prompting user for input on how many rows the top half of the diamond should have
+n = int(input("Enter the number of rows for the top half of the diamond: "))
 
+# Top half of the diamond
+for i in range(1, n + 1):  # Starts at 1, increments up to n
+    spaces = n - i  # Calculates the number of spaces for the top half
+    hashes = 2 * i - 1  # Calculates the number of '#' characters for the top half
+    print(" " * spaces + "#" * hashes)  # Prints spaces followed by hashes
 
-
-# count = int(input("Enter number: "))
-# while ((count % 2) == 1):
-#     count = int(input("Enter number: "))
-count = 18
-temp = 0
-lock = count
-for x in range(1, (count*2), 2):
-    s = "#"
-    i = "1"
-    s = s * temp
-    i = i * (count - (lock - 1))
-    print(f"{i}{s}{i}")
-  
-    if temp < count2/2:
-        temp += 1
-        temp2 +=1
-    else:
-        temp2 -=1
-    
-    
-
-
-     
-    
-
-
+# Bottom half of the diamond
+for i in range(n - 1, 0, -1):  # Starts at n-1, decrements down to 1
+    spaces = n - i  # Calculates the number of spaces for the bottom half
+    hashes = 2 * i - 1  # Calculates the number of '#' characters for the bottom half
+    print(" " * spaces + "#" * hashes)  # Prints spaces followed by hashes
