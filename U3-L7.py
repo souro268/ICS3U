@@ -1,5 +1,7 @@
 def DNA(strand):
+  z = ""
   for x in range(len(strand)):
+    
     if strand[x] == ("C"):
       output.append("G")
       
@@ -11,7 +13,10 @@ def DNA(strand):
       
     if strand[x] == ("T"):
       output.append("A")
-  return output
+    z = z + output[x]
+  return z
 output = []
 strand = input("Enter strand: ")
 print(DNA(strand))
+
+
