@@ -17,17 +17,17 @@ def wc(TdegC, windKPH):
 def risk(wind_chill):
     # all the starting conditions from the chart have to be the max value from the row abvoe beucase if not then the code will break if the wind chill is between those numbers
     # For example, <= -9 and <= -10, the number between -9 and -10 will return 'unknown risk'. 
-    if wind_chill >= 0 and wind_chill <= -9:
+    if wind_chill >= 0 and wind_chill <= -10:
         return "Low risk"
-    elif wind_chill <= -9 and wind_chill >= -27: 
+    elif wind_chill <= -10 and wind_chill > -28: 
         return "Moderate risk of hypothermia"
-    elif wind_chill <= -27 and wind_chill >= -39:
+    elif wind_chill <= -28 and wind_chill > -40:
         return "High risk of frostbite"
-    elif wind_chill <= -39 and wind_chill >= -47:
+    elif wind_chill <= -40 and wind_chill > -48:
         return "Severe risk of frostbite: exposed skin freezes in 5-10 minutes"
-    elif wind_chill <= -47 and wind_chill >= -54:
+    elif wind_chill <= -48 and wind_chill > -55:
         return "Severe risk of frostbite: exposed skin freezes in 2-5 minutes"
-    elif wind_chill < -54:  
+    elif wind_chill < -55:  
         return "Extreme risk: exposed skin freezes in under 2 minutes"
     else:
         return "Unknown risk"
