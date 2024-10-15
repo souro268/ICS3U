@@ -5,6 +5,8 @@ def wc(TdegC, windKPH):
     # TW is the wind chill
     # T is the temperature in degree C
     # V is the wind speed in km/h
+    # Return:
+    # vTemp is the total windchill
     vTemp = 0
     # Code here
     V = m.pow(windKPH, 0.16) 
