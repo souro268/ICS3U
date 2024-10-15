@@ -1,5 +1,5 @@
 def validate(s):
-    num = 0
+    num = 0    
     for a in range(len(s)):
         if s[a] == "C" or s[a] == "A" or s[a] == "T" or s[a] == "G":
             num = 0
