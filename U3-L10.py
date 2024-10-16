@@ -11,7 +11,11 @@ if inputs >= 2: # checks if input is >= to 2
             total = a+b # math sutff
             if total == c: # checks if a + b(total) is equal to c, if so that means its a triple
                 lists.append(n) # adds n to the list of numbers so you know the starting
-                print(f"A = {m.sqrt(a)} \nB = {m.sqrt(b)} \nC = {m.sqrt(c)} \ntotal = {m.sqrt(total)}") # prints the values
+                a = m.sqrt(a)
+                b = m.sqrt(b)
+                c = m.sqrt(c)
+                total = m.sqrt(total)
+                print("A: %d, B: %d, C: %d" % (a, b, c))
                 print("----------------------------------------------") # prints
         elif(n%2 == 0): # checks if the number is even
             z = m.pow(n,2)/4 # math stuff
@@ -21,7 +25,11 @@ if inputs >= 2: # checks if input is >= to 2
             total1 = a1+b1 # math stuff
             if total1 == c1: # checks if total (a+b) is equal to c
                 lists.append(n) # adds n to the list of numbers so you know the starting
-                print(f"A = {m.sqrt(a1)} \nB = {m.sqrt(b1)} \nC = {m.sqrt(c1)} \ntotal = {m.sqrt(total1)}") # prints the values
+                a1 = m.sqrt(a1)
+                b1 = m.sqrt(b1)
+                c1 = m.sqrt(c1)
+                total1 = m.sqrt(total1)
+                print("A: %d, B: %d, C: %d" % (a1, b1, c1))
                 print("----------------------------------------------") # prints
     print(lists)
 else: # if the number is less than 2 then it tells the user to enter a value above 2
