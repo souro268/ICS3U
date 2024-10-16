@@ -1,8 +1,8 @@
 import math as m
 lists = []
-inputs = int(input("Please enter a integer thats >= 3: ")) # asks user for input
+inputs = int(input("Please enter a integer thats >= 2: ")) # asks user for input
 
-if inputs >= 3: # checks if input is >= to 3 
+if inputs >= 2: # checks if input is >= to 2 
     for n in range(3,inputs + 1, 1): # forloop that starts at 1
         if(n%2 == 1):  # checks if the number of odd
             a = m.pow(n,2) # math stuff
@@ -24,7 +24,7 @@ if inputs >= 3: # checks if input is >= to 3
                 print(f"A = {m.sqrt(a1)} \nB = {m.sqrt(b1)} \nC = {m.sqrt(c1)} \ntotal = {m.sqrt(total1)}") # prints the values
                 print("----------------------------------------------") # prints
     print(lists)
-else: # if the number is less than 3 then it tells the user to enter a value above 3
-    print("Please enter a value above 3") # prints
+else: # if the number is less than 2 then it tells the user to enter a value above 2
+    print("Please enter a value above 2") # prints
 
         
