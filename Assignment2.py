@@ -9,9 +9,17 @@
 # perimeter: is a varible where the perimeter is set to 0. (just to declare it)
 # arr2: is another array to star the last value of the array which is the greatest common factor of the users number
 # number: is a varible which stores the sqrt of the number and then floor function it to make the excution time smaller
-
-
 import math as m
+def factors(user): # defines function to find the factors for the number
+    number = m.floor(m.sqrt(user)) # finds the sqrt and floor function of users number so its faster and easier 
+    for x in range(1, number + 1): # for loop to find the factors of user input
+        if number == m.sqrt(user): # if the number is a perfect square, the nuymber is added to the array
+            arr.append(number)
+            arr.append(number)
+            return arr
+        if user % x == 0: # if the input is disible by x than add that number to the array
+            arr.append(x) # adds number to array
+    return arr
 arr = []  # declares the array
 n = 0  # decalares n as 0 so the program runs until the user enters done
 print("Welcome to the school yearbook program!")  # printing text
@@ -25,14 +33,7 @@ while n == 0: # while loop which will run until user enters done which would thn
         if user <= 0: # if input is less than or equal to 0 the number is invalue which
             print(f"{user} is not a valid number of photos. Please enter a positive number.")
         if user > 0: # if input ois vaild the program continews
-            number = m.floor(m.sqrt(user)) # finds the sqrt and floor function of users number so its faster and easier 
-            for x in range(1, number + 1): # for loop to find the factors of user input
-                if number == m.sqrt(user): # if the number is a perfect square, the nuymber is added to the array
-                    arr.append(number)
-                    arr.append(number)
-                    break # breaks the for loop and ends the factoing part
-                if user % x == 0: # if the input is disible by x than add that number to the array
-                    arr.append(x) # adds number to array
+            arr = factors(user)
             arr2 = arr[len(arr)-1:] # removes all elements of the array besides the last one and sets it to arr2
             perimeter = (arr2[0] + int(user/arr2[0])) * 2 # finds perimeter
             print("----------------------------------------------------------------------------")
