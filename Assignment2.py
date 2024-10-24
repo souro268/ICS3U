@@ -23,7 +23,7 @@ def factors(user): # defines function to find the factors for the number
 arr = []  # declares the array
 n = 0  # decalares n as 0 so the program runs until the user enters done
 print("Welcome to the school yearbook program!")  # printing text
-print("Print 'Done' to exit the progran")  # printing text
+print("Enter 'Done' to exit the progran")  # printing text
 while n == 0: # while loop which will run until user enters done which would thne set the number to  1 which would stop the look
     perimeter = 0 # declares the varible
     arr2 = [] # declares the array
