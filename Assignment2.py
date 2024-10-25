@@ -3,44 +3,49 @@
 # ICS 3U
 
 # Variable Dictionary:
-# user: is the varible where the users' input is stored
-# arr: is an array which stores all the factors of the number the user inters
-# n: is a varible so the code runs forever until the user enters done which adds 1 to n, and when n is not 0 the program stops
-# perimeter: is a varible where the perimeter is set to 0. (just to declare it)
-# arr2: is another array to star the last value of the array which is the greatest common factor of the users number
-# number: is a varible which stores the sqrt of the number and then floor function it to make the excution time smaller
+# user: variable that stores the user's input
+# arr: an array that stores all the factors of the number the user enters
+# n: variable that keeps the code running indefinitely until the user enters "done," which increments n, stopping the program when n is not 0
+# perimeter: variable initialized to 0 to declare the perimeter value
+# arr2: another array to store the last value of arr, which is the greatest factor of the user's number
+# number: variable that stores the square root of the number, floored to reduce execution time
+
 import math as m
-def factors(user): # defines function to find the factors for the number
-    number = m.floor(m.sqrt(user)) # finds the sqrt and floor function of users number so its faster and easier 
-    for x in range(1, number + 1): # for loop to find the factors of user input
-        if number == m.sqrt(user): # if the number is a perfect square, the nuymber is added to the array
+
+def factors(user):  # defines a function to find the factors of a number
+    number = m.floor(m.sqrt(user))  # finds the floored square root of the user's number for faster processing
+    for x in range(1, number + 1):  # loop to find factors of the user input
+        if number == m.sqrt(user):  # if the number is a perfect square, it is added twice to the array
             arr.append(number)
             arr.append(number)
             return arr
-        if user % x == 0: # if the input is disible by x than add that number to the array
-            arr.append(x) # adds number to array
+        if user % x == 0:  # if user input is divisible by x, add x to the array
+            arr.append(x)  # adds factor to the array
     return arr
+
 arr = []  # declares the array
-n = 0  # decalares n as 0 so the program runs until the user enters done
-print("Welcome to the school yearbook program!")  # printing text
-print("Enter 'Done' to exit the progran")  # printing text
-while n == 0: # while loop which will run until user enters done which would thne set the number to  1 which would stop the look
-    perimeter = 0 # declares the varible
-    arr2 = [] # declares the array
-    user = input("Input a number of photos (Must be a positive number): ") # asks for user input and sets the number to user
-    try: # try function just in case
-        user = int(user) # sets user input from string to int
-        if user <= 0: # if input is less than or equal to 0 the number is invalue which
+n = 0  # initializes n to 0 to keep the program running until the user enters "done"
+print("Welcome to the school yearbook program!")  # introductory message
+print("Enter 'Done' to exit the program")  # exit instruction
+
+while n == 0:  # loop that runs until user enters "done," setting n to 1 and stopping the loop
+    perimeter = 0  # initializes the perimeter variable
+    arr2 = []  # declares arr2 as an empty array
+    user = input("Input a number of photos (must be a positive number): ")  # prompts user for input
+
+    try:  # try block for input validation
+        user = int(user)  # converts user input from string to integer
+        if user <= 0:  # if input is 0 or negative, prompt user to enter a positive number
             print(f"{user} is not a valid number of photos. Please enter a positive number.")
-        if user > 0: # if input ois vaild the program continews
+        if user > 0:  # if input is valid, continue program
             arr = factors(user)
-            arr2 = arr[len(arr)-1:] # removes all elements of the array besides the last one and sets it to arr2
-            perimeter = (arr2[0] + int(user/arr2[0])) * 2 # finds perimeter
+            arr2 = arr[len(arr)-1:]  # keeps only the last element of arr as arr2
+            perimeter = (arr2[0] + int(user / arr2[0])) * 2  # calculates the perimeter
             print("----------------------------------------------------------------------------")
-            print(f"The best dimensions are {arr2[0]} x {int(user/arr2[0])} photos for a perimeter of {perimeter}.") #prints the deminsions and perimeter
+            print(f"The best dimensions are {arr2[0]} x {int(user / arr2[0])} photos for a perimeter of {perimeter}.")
             print("----------------------------------------------------------------------------")
             
     except:
-        if user == "done" or user == "DONE" or user == "Done": # if user input is done the program ends
-            print("Goodbye!") 
-            n = 1 # after user input is done, n is equal to 1 so the while loop doesnt work
+        if user.lower() == "done":  # if user input is "done" (case-insensitive), end program
+            print("Goodbye!")
+            n = 1  # sets n to 1, stopping the while loop
