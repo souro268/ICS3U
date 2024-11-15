@@ -10,6 +10,7 @@ cols = int(cols)
 numColors = int(numColors)
 #colorDefs = [[0] * 2] * numColors # declare the array
 colorDefs = {}
+arr = []
 for i in range(numColors):
    colorLine = fh.readline()
    colorLine = colorLine.strip()
@@ -17,6 +18,11 @@ for i in range(numColors):
    if sym == '~':
        sym = " "
    colorDefs[sym] = color
-
+   arr.append(colorDefs[sym])
 fh.close()
-print(colorDefs)
+space = " "
+for sym, color in colorDefs.items():
+    print(f"{sym}: {color}")
+
+    
+
