@@ -8,9 +8,15 @@ rows, cols, numColors = colorData.split()
 rows = int(rows)
 cols = int(cols)
 numColors = int(numColors)
-#colorDefs = [[0] * 2] * numColors # declare the array
+
 colorDefs = {}
-arr = []
+temp = 0
+if rows >= cols:
+    temp = rows
+if rows <= cols:
+    temp = cols
+arr = [0] * temp
+
 for i in range(numColors):
    colorLine = fh.readline()
    colorLine = colorLine.strip()
@@ -18,11 +24,17 @@ for i in range(numColors):
    if sym == '~':
        sym = " "
    colorDefs[sym] = color
-   arr.append(colorDefs[sym])
+
+for j in range(temp):
+    arr[j] = fh.readline()
 fh.close()
-space = " "
+print("Number of colums: ", cols)
+print("Number of rows: ", rows)
+print("Number of colors: ", numColors)
 for sym, color in colorDefs.items():
     print(f"{sym}: {color}")
+for y in range(len(arr)):
+    print(arr[y], end="")
 
     
 
