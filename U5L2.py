@@ -35,6 +35,3 @@ for sym, color in colorDefs.items():
     print(f"{sym}: {color}")
 for y in range(len(arr)):
     print(arr[y], end="")
-
-    
-
