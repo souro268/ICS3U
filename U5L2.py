@@ -1,3 +1,4 @@
+import turtle as t
 filename = "file.txt"
 fh = open(filename, "r")
 
@@ -35,3 +36,16 @@ for sym, color in colorDefs.items():
     print(f"{sym}: {color}")
 for y in range(len(arr)):
     print(arr[y], end="")
+    
+
+def plotIT(x, y, d, color):
+    t.
+
+for x in range(rows*cols):
+    strtemp = arr[x]
+    if strtemp[x] == 
+    plotIT(a, b, 3, color)
+    
+    
+    
+
