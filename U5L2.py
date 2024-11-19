@@ -45,20 +45,17 @@ print("Number of colors: ", numColors)
 thickness = 5
 a = (m.floor(rows/2) * -1) - (m.floor(rows/2) * thickness)
 temp2 = a
-print(a)
 b = m.floor(cols/2)  + (m.floor(cols/2) * thickness)
 
 for x in range(len(arr)):
     strtemp = arr[x]
-    if a == m.floor(rows/2):
-        a = temp2
     for sym, color in colorDefs.items():
         print(strtemp)
         for l in range(len(strtemp)):
             if strtemp[l] == sym:
                 plotIT(a, b, 3, color)
             a = a + thickness
-            if a == (temp2 * -1):
+            if a == temp2 * -1:
                 b = b - thickness
             print(t.pos())
 
