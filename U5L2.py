@@ -1,5 +1,14 @@
 import turtle as t
-filename = "file.txt"
+import math as m
+
+def plotIT(x, y, d, color):
+    t.penup()
+    t.goto(x,y)
+    t.pendown()
+    t.dot(d, color)
+                    
+
+filename = "temp.txt"
 fh = open(filename, "r")
 
 colorData = fh.readline()
@@ -32,20 +41,28 @@ fh.close()
 print("Number of colums: ", cols)
 print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
-for sym, color in colorDefs.items():
-    print(f"{sym}: {color}")
-for y in range(len(arr)):
-    print(arr[y], end="")
-    
 
-def plotIT(x, y, d, color):
-    t.
+thickness = 5
+a = (m.floor(rows/2) * -1) + (m.floor(rows/2) * thickness)
+temp2 = a
+b = m.floor(cols/2)  + (m.floor(cols/2) * thickness)
 
-for x in range(rows*cols):
+for x in range(len(arr)):
     strtemp = arr[x]
-    if strtemp[x] == 
-    plotIT(a, b, 3, color)
-    
-    
+    if a == m.floor(rows/2):
+        a = temp2
+    for sym, color in colorDefs.items():
+        print(strtemp)
+        for l in range(len(strtemp)):
+            if strtemp[l] == sym:
+                plotIT(a, b, 3, color)
+            a = a + thickness
+            if a == (temp2 * -1):
+                b = b + thickness
+            print(t.pos())
+
+        
     
 
+    
+    
