@@ -43,8 +43,9 @@ print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
 
 thickness = 5
-a = (m.floor(rows/2) * -1) + (m.floor(rows/2) * thickness)
+a = (m.floor(rows/2) * -1) - (m.floor(rows/2) * thickness)
 temp2 = a
+print(a)
 b = m.floor(cols/2)  + (m.floor(cols/2) * thickness)
 
 for x in range(len(arr)):
@@ -58,7 +59,7 @@ for x in range(len(arr)):
                 plotIT(a, b, 3, color)
             a = a + thickness
             if a == (temp2 * -1):
-                b = b + thickness
+                b = b - thickness
             print(t.pos())
 
         
