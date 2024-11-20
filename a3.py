@@ -1,14 +1,15 @@
 import turtle as t
 import math as m
-
+t.screensize(canvwidth=10000, canvheight=10000)
 def plotIT(x, y, thickness, color):
     t.penup()
     t.goto(x,y)
     t.pendown()
     t.dot(thickness, color)
-                    
+                
 
-filename = "rocky_bullwinkle_mod.xpm"
+
+filename = "rb1.xpm"
 fh = open(filename, "r")
 
 colorData = fh.readline()
@@ -42,8 +43,8 @@ print("Number of colums: ", cols)
 print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
 
-
 thickness = 2
+
 b = ( m.floor(cols/2) * thickness)
 t.tracer(0,0)
 for x in range(len(arr)):
@@ -53,11 +54,7 @@ for x in range(len(arr)):
     for l in range(len(strtemp)):
         plotIT(a, b, thickness, colorDefs[strtemp[l]])
         a = a + thickness
-        if a == ((m.floor(rows/2)+1) * thickness):
-            b = b - thickness
+        if a == ((m.floor(rows/2)) * thickness):
+            b = b - thickness                  
 t.update()
-                   
-    
-
-    
-    
+t.mainloop() 
