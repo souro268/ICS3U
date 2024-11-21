@@ -16,7 +16,7 @@ def DegreesZero(fh, rows, cols, plotIT):
         for l in range(len(strtemp)):
             plotIT(a, b, thickness, colorDefs[strtemp[l]])
             a = a + thickness
-            if a > ((m.floor(rows/2)) * thickness):
+            if a == ((m.floor(rows/2)) * thickness):
                 b = b - thickness                 
     t.update()
     
@@ -36,7 +36,7 @@ def Degrees180(fh, rows, cols, plotIT):
 
 
 #filename = "file.txt"
-filename = "rocky_bullwinkle_mod (2).xpm"
+filename = "rocky_bullwinkle_mod.xpm"
 #filename = 'temp1.txt'
 fh = open(filename, "r")
 
@@ -69,12 +69,13 @@ for i in range(numColors):
 
 for j in range(temp):
     arr[j] = fh.readline()
-fh.close()
+
 print("Number of colums: ", cols)
 print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
 
-thickness = 2
-DegreesZero(fh, rows, cols, plotIT)
+thickness = 3
 Degrees180(fh, rows, cols, plotIT)
+fh.close()
+
 
