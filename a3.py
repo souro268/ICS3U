@@ -1,15 +1,43 @@
 import turtle as t
 import math as m
-t.screensize(canvwidth=10000, canvheight=10000)
+
 def plotIT(x, y, thickness, color):
     t.penup()
     t.goto(x,y)
     t.pendown()
     t.dot(thickness, color)
                 
+def DegreesZero(fh, rows, cols, plotIT):
+    t.tracer(0,0)
+    b = ( m.floor(cols/2) * thickness)
+    for x in range(len(arr)):
+        a = ( m.floor(rows/2) * thickness) *-1
+        strtemp = arr[x].strip()
+        for l in range(len(strtemp)):
+            plotIT(a, b, thickness, colorDefs[strtemp[l]])
+            a = a + thickness
+            if a > ((m.floor(rows/2)) * thickness):
+                b = b - thickness                 
+    t.update()
+    
+def Degrees180(fh, rows, cols, plotIT):
+    t.tracer(0,0)
+    b = ( m.floor(cols/2) * thickness)
+    for x in range(len(arr)):
+        a = ( m.floor(rows/2) * thickness) *-1
+        strtemp = arr[x].strip()
+        for l in range(len(strtemp)):
+            plotIT(-a, -b, thickness, colorDefs[strtemp[l]])
+            a = a + thickness
+            if a == ((m.floor(rows/2)) * thickness):
+                b = b - thickness                
+    t.update()
 
 
-filename = "rb1.xpm"
+
+#filename = "file.txt"
+filename = "rocky_bullwinkle_mod (2).xpm"
+#filename = 'temp1.txt'
 fh = open(filename, "r")
 
 colorData = fh.readline()
@@ -20,8 +48,11 @@ rows = int(rows)
 cols = int(cols)
 numColors = int(numColors)
 
+
 colorDefs = {}
 temp = 0
+
+
 if rows >= cols:
     temp = rows
 if rows <= cols:
@@ -33,7 +64,7 @@ for i in range(numColors):
    colorLine = colorLine.strip()
    sym, c, color = colorLine.split()
    if sym == '~':
-       sym = " "
+      sym = " "
    colorDefs[sym] = color
 
 for j in range(temp):
@@ -44,17 +75,6 @@ print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
 
 thickness = 2
+DegreesZero(fh, rows, cols, plotIT)
+Degrees180(fh, rows, cols, plotIT)
 
-b = ( m.floor(cols/2) * thickness)
-t.tracer(0,0)
-for x in range(len(arr)):
-    a = ( m.floor(rows/2) * thickness) *-1
-    strtemp = arr[x].strip()
-    print(strtemp)
-    for l in range(len(strtemp)):
-        plotIT(a, b, thickness, colorDefs[strtemp[l]])
-        a = a + thickness
-        if a == ((m.floor(rows/2)) * thickness):
-            b = b - thickness                  
-t.update()
-t.mainloop() 
