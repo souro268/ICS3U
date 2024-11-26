@@ -37,63 +37,31 @@ def plotIT(x, y, thickness, color):
     t.pendown()
     t.dot(thickness, color)
 
-def Degrees0(plotIT):
-    
+def RotationFunction(plotIT, rotation, colorDefs, arr):
+
     t.tracer(0, 0)
-    b = cols / 2 * thickness
-    for x in range(len(arr)):
-        a = -rows / 2 * thickness
+    b = (cols / 2 * thickness) + 1
+    for x in range(0, len(arr), 1):
+        strtemp = ''
+        a = (rows / 2 * thickness) * -1
         strtemp = arr[x].strip()
-        for l in range(len(strtemp)):
-            color = colorDefs[strtemp[l]]
-            plotIT(a, b, thickness, color)
-            a += thickness
         b -= thickness
+        for l in strtemp:
+            color = colorDefs[l]
+            if rotation == 0:
+                plotIT(a, b, thickness, color)
+            if rotation == 90:
+                plotIT(b, -a, thickness, color)
+            if rotation == 180:
+                plotIT(-a, -b, thickness, color)
+            if rotation == 270:
+                plotIT(-b, a, thickness, color)
+            a += thickness
+        
     t.update()
 
-def Degrees90(plotIT):
-    
-    t.tracer(0, 0)
-    b = cols / 2 * thickness
-    for x in range(len(arr)):
-        a = -rows / 2 * thickness
-        strtemp = arr[x].strip()
-        for l in range(len(strtemp)):
-            color = colorDefs[strtemp[l]]
-            plotIT(b, -a, thickness, color)
-            a += thickness
-        b -= thickness
-    t.update()
-
-def Degrees180(plotIT):
-    
-    t.tracer(0, 0)
-    b = cols / 2 * thickness
-    for x in range(len(arr)):
-        a = -rows / 2 * thickness
-        strtemp = arr[x].strip()
-        for l in range(len(strtemp)):
-            color = colorDefs[strtemp[l]]
-            plotIT(-a, -b, thickness, color)
-            a += thickness
-        b -= thickness
-    t.update()
-
-def Degrees270(plotIT):
-    
-    t.tracer(0, 0)
-    b = cols / 2 * thickness
-    for x in range(len(arr)):
-        a = -rows / 2 * thickness
-        strtemp = arr[x].strip()
-        for l in range(len(strtemp)):
-            color = colorDefs[strtemp[l]]
-            plotIT(-b, a, thickness, color)
-            a += thickness
-        b -= thickness
-    t.update()
-
-filename = "rb1.xpm"  # File containing image data
+filename = "rocky_bullwinkle_mod.xpm"  # File containing image data
+#filename = 'cool_smiley_mod.xpm'
 fh = open(filename, "r")  # Open the file for reading
 
 colorData = fh.readline()
@@ -116,13 +84,9 @@ for i in range(numColors):
         sym = " "
     colorDefs[sym] = color  # Map the symbol to its color
 
-for j in range(temp):
+for j in range(cols):
     arr[j] = fh.readline()  # Read each row into the array
-fh.close()  # Close the file
 
-print("Number of columns: ", cols)
-print("Number of rows: ", rows)
-print("Number of colors: ", numColors)
 
 thickness = int(input("Enter thickness: "))  # Prompt user for dot thickness
 inputs = int(input("Enter the degree of rotation (0, 90, 180, 270): "))  # Prompt user for rotation degree
@@ -131,13 +95,23 @@ t.screensize(canvwidth=1000, canvheight=1000)  # Set up the canvas size
 
 # Execute the appropriate function based on user input
 if inputs == 0:
-    Degrees0(plotIT)
+    rotation = 0
+    RotationFunction(plotIT, rotation, colorDefs, arr)
 elif inputs == 90:
-    Degrees90(plotIT)
+    rotation = 90
+    RotationFunction(plotIT, rotation, colorDefs, arr)
 elif inputs == 180:
-    Degrees180(plotIT)
+    rotation = 180
+    RotationFunction(plotIT, rotation, colorDefs, arr)
 elif inputs == 270:
-    Degrees270(plotIT)
+    rotation = 270
+    RotationFunction(plotIT, rotation, colorDefs, arr)
 else:
     print("Invalid rotation degree. Please choose from 0, 90, 180, or 270.")
-    n = 1
+
+print("Number of columns: ", cols)
+print("Number of rows: ", rows)
+print("Number of colors: ", numColors)
+print(arr)
+fh.close()  # Close the file
+
