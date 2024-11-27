@@ -71,6 +71,8 @@ def ForLoops(fh, numColors, temp, RotationFunction):
         arr[j] = fh.readline()  # Read each row into the array
     RotationFunction(plotIT, rotation)
 
+
+
 filename = "rocky_bullwinkle_mod.xpm"  # File containing image data
 fh = open(filename, "r")  # Open the file for reading
 
@@ -113,3 +115,5 @@ print("Number of columns: ", cols)
 print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
 fh.close()  # Close the file
+
+
