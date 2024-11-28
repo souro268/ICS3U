@@ -30,16 +30,20 @@ import turtle as t
 import math as m
 
 def plotIT(x, y, thickness, color):
-    #Plots a dot at the given coordinates with specified thickness and color.
+    #Plots a dot at the given coordinates with specified thickness and 
     t.penup()
     t.goto(x, y)
     t.pendown()
-    t.dot(thickness, color)
+    t.shape('square')
+    t.color(color)
+    t.turtlesize(thickness, thickness)
+    t.stamp()
+    t.penup()
 
 def RotationFunction(plotIT, rotation):
     
     t.tracer(0, 0)
-    b = (cols / 2 * thickness) + 1
+    b = (cols / 2 * thickness)
     for x in range(0, len(arr), 1):
         strtemp = ''
         a = (rows / 2 * thickness) * -1
@@ -56,7 +60,6 @@ def RotationFunction(plotIT, rotation):
             if rotation == 270:
                 plotIT(-b, a, thickness, color)
             a += thickness
-        
     t.update()
 
 def ForLoops(fh, numColors, temp, RotationFunction):
@@ -73,7 +76,9 @@ def ForLoops(fh, numColors, temp, RotationFunction):
 
 
 
-filename = "rocky_bullwinkle_mod.xpm"  # File containing image data
+#filename = "rocky_bullwinkle_mod.xpm"  # File containing image data
+filename = 'smiley_emoji_mod.xpm'
+#filename = 'file.txt'
 fh = open(filename, "r")  # Open the file for reading
 
 colorData = fh.readline()
@@ -94,7 +99,6 @@ inputs = int(input("Enter the degree of rotation (0, 90, 180, 270): "))  # Promp
 print("Check your taskbar to open the turtle graphics window to view your image")
 
 t.screensize(canvwidth=1000, canvheight=1000)  # Set up the canvas size
-
 # Execute the appropriate function based on user input
 if inputs == 0:
     rotation = 0
@@ -111,6 +115,8 @@ elif inputs == 270:
 else:
     print("Invalid rotation degree. Please choose from 0, 90, 180, or 270.")
 
+t.goto(0, 0)
+t.dot(10, 'purple')
 print("Number of columns: ", cols)
 print("Number of rows: ", rows)
 print("Number of colors: ", numColors)
