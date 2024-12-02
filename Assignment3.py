@@ -37,13 +37,14 @@ def plotIT(x, y, thickness, color):
     
 
 def RotationFunction(plotIT, rotation):
+    
     t.tracer(0, 0)
     b = (cols / 2 * thickness)
     for x in range(0, len(arr)):
         strtemp = ''
         a = (rows / 2 * thickness) * -1
         strtemp = arr[x].strip()
-        b = b - thickness
+        b = b - (thickness *1)
         for l in range(len(strtemp)):
             color = colorDefs[strtemp[l]]
             if rotation == 0:
@@ -54,7 +55,7 @@ def RotationFunction(plotIT, rotation):
                 plotIT(-a, -b, thickness, color)
             if rotation == 270:
                 plotIT(-b, a, thickness, color)
-            a = a + thickness 
+            a = a + (thickness *1)
     t.update()
     
 
@@ -72,10 +73,10 @@ def ForLoops(fh, numColors, temp, RotationFunction):
 
 
 
-filename = "rocky_bullwinkle_mod (2).xpm"  # File containing image data
-#filename = 'smiley_emoji_mod.xpm'
+#filename = 'rocky_bullwinkle_mod.xpm'
+filename = 'smiley_emoji_mod.xpm'
 #filename = 'cool_smiley_mod.xpm'
-#filename = 'temp2.xpm'
+#filename = 'file.txt'
 fh = open(filename, "r")  # Open the file for reading
 
 colorData = fh.readline()
