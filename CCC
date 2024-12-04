@@ -1,0 +1,16 @@
+import math as m
+user = input("")
+user1, user2 = user.split()
+user1 = int(user1)
+user2 = int(user2)
+arr = [' ']*(user1-1)
+for i in range(user2):
+    arr.append(i+1)
+for x in range(7 - user1):
+    arr.append(' ')
+print("%s %s %s %s %s %s %s" %('Sun', 'Mon', 'Tue', 'Wed', 'Thr', 'Fri', 'Sat'))
+for j in range(m.ceil(user2/7)):
+    print("%3s %3s %3s %3s %3s %3s %3s" %(str(arr[j*7]), str(arr[j*7+1]), str(arr[j*7+2]), str(arr[j*7+3]), str(arr[j*7+4]), str(arr[j*7+5]), str(arr[j*7+6])))
+     
+
+    
