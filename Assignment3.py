@@ -74,10 +74,12 @@ def ForLoops(fh, numColors, temp, RotationFunction):
 
 
 
+#asks user for filename
+filename = input("Please enter for the file you would like to display.: ") 
 #filename = 'rocky_bullwinkle_mod.xpm'
 #filename = 'smiley_emoji_mod.xpm'
 #filename = 'cool_smiley_mod.xpm'
-filename = 'temp2.xpm'
+#filename = 'temp2.xpm'
 fh = open(filename, "r")  # Open the file for reading
 
 colorData = fh.readline()
