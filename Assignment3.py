@@ -67,7 +67,7 @@ def ForLoops(fh, numColors, temp, RotationFunction):
         arr[j] = fh.readline()  # Reads and stores each row of pixel data
     RotationFunction(plotIT, rotation)  # Calls the RotationFunction to draw the image
 
-filename = 'smiley_emoji_mod.xpm'
+#filename = 'smiley_emoji_mod.xpm'
 filename = input("Please enter the file you want to display.: ")
 fh = open(filename, "r")  # Opens the file in read mode
 
