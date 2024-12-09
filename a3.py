@@ -12,14 +12,15 @@ strtemp: A temporary string to hold a row of pixel data as it's processed.
 a: Tracks the horizontal position on the canvas.
 colorDefs: A dictionary mapping symbols (characters) to their corresponding colors.
 fh: File handle used to read the image data from the file.
-filename: Stores the name of the file containing the image data (e.g., "smiley_emoji_mod.xpm").
-colorData: The first line of the file containing image metadata, including rows, columns, and colors.
+filename: Stores the name of the file containing the image data.
+colorData: The first line of the file containing image color data, including rows, columns, and colors.
 rows: The number of rows in the image.
 cols: The number of columns in the image.
 numColors: The total number of unique colors in the image.
 temp: The larger of the number of rows or columns, used to initialize the array.
 inputs: The degree of rotation input by the user (0, 90, 180, or 270).
 thickness: The thickness of the dots, specified by the user.
+c: A variable for unpacking color definitions.
 '''
 
 import turtle as t  # Importing the turtle module for drawing graphical representations
@@ -27,6 +28,7 @@ import turtle as t  # Importing the turtle module for drawing graphical represen
 # Function to plot a dot at specified coordinates with given thickness and color
 def plotIT(x, y, thickness, color):
     t.penup()  # Lifts the pen to move without drawing
+    
     t.goto(x, y)  # Moves to the specified (x, y) coordinates
     t.pendown()  # Lowers the pen to enable drawing
     t.dot(thickness, color)  # Draws a dot of the given thickness and color
@@ -66,48 +68,52 @@ def ForLoops(fh, numColors, temp, RotationFunction):
     for j in range(temp):  # Loops through the maximum of rows and columns
         arr[j] = fh.readline()  # Reads and stores each row of pixel data
     RotationFunction(plotIT, rotation)  # Calls the RotationFunction to draw the image
+# trys to open the filename that the user inputs, and if there is any error, it exits out of the program
+try: 
+    print("Please enter the file you want to display.")
+    filename = input("Some examples include: smiley_emoji_mod.xpm, rocky_bullwinkle_mod.xpm, file.txt:")
+    fh = open(filename, "r")  # Opens the file in read mode
 
-#filename = 'smiley_emoji_mod.xpm'
-filename = input("Please enter the file you want to display.: ")
-fh = open(filename, "r")  # Opens the file in read mode
+    colorData = fh.readline()  # Reads the first line containing color data
+    colorData.strip()  # Cleans any extra whitespace from the color data
 
-colorData = fh.readline()  # Reads the first line containing metadata
-colorData.strip()  # Cleans any extra whitespace from the metadata
+    # Parses the colordata to extract rows, columns, and the number of colors
+    rows, cols, numColors = colorData.split()  
+    rows = int(rows)  # Converts the number of rows to an integer
+    cols = int(cols)  # Converts the number of columns to an integer
+    numColors = int(numColors)  # Converts the number of colors to an integer
 
-# Parses the metadata to extract rows, columns, and the number of colors
-rows, cols, numColors = colorData.split()  
-rows = int(rows)  # Converts the number of rows to an integer
-cols = int(cols)  # Converts the number of columns to an integer
-numColors = int(numColors)  # Converts the number of colors to an integer
+    colorDefs = {}  # Initializes a dictionary to store symbol-to-color mappings
+    temp = max(rows, cols)  # Finds the larger dimension for initializing the array
+    arr = [0] * temp  # Creates an array to store image pixel data
 
-colorDefs = {}  # Initializes a dictionary to store symbol-to-color mappings
-temp = max(rows, cols)  # Finds the larger dimension for initializing the array
-arr = [0] * temp  # Creates an array to store image pixel data
+    thickness = int(input("Enter thickness: "))  # Asks the user for the dot thickness
+    # Asks the user for the rotation degree (0, 90, 180, or 270)
+    inputs = int(input("Enter the degree of rotation (0, 90, 180, 270): "))
+    print("Check your taskbar to open the turtle graphics window to view your image")
 
-thickness = int(input("Enter thickness: "))  # Asks the user for the dot thickness
-# Asks the user for the rotation degree (0, 90, 180, or 270)
-inputs = int(input("Enter the degree of rotation (0, 90, 180, 270): "))
-print("Check your taskbar to open the turtle graphics window to view your image")
+    t.screensize(canvwidth=1000, canvheight=1000, bg = 'white')  # Sets the turtle canvas size
 
-t.screensize(canvwidth=1000, canvheight=1000)  # Sets the turtle canvas size
+    # Handles the user-selected rotation and calls the ForLoops function to draw
+    if inputs == 0:
+        rotation = 0
+        ForLoops(fh, numColors, temp, RotationFunction)
+    elif inputs == 90:
+        rotation = 90
+        ForLoops(fh, numColors, temp, RotationFunction)
+    elif inputs == 180:
+        rotation = 180
+        ForLoops(fh, numColors, temp, RotationFunction)
+    elif inputs == 270:
+        rotation = 270
+        ForLoops(fh, numColors, temp, RotationFunction)
+    else:
+        print("Invalid rotation degree. Please choose from 0, 90, 180, or 270.")
 
-# Handles the user-selected rotation and calls the ForLoops function to draw
-if inputs == 0:
-    rotation = 0
-    ForLoops(fh, numColors, temp, RotationFunction)
-elif inputs == 90:
-    rotation = 90
-    ForLoops(fh, numColors, temp, RotationFunction)
-elif inputs == 180:
-    rotation = 180
-    ForLoops(fh, numColors, temp, RotationFunction)
-elif inputs == 270:
-    rotation = 270
-    ForLoops(fh, numColors, temp, RotationFunction)
-else:
-    print("Invalid rotation degree. Please choose from 0, 90, 180, or 270.")
-
-print("Number of columns: ", cols)  # Displays the number of columns in the image
-print("Number of rows: ", rows)  # Displays the number of rows in the image
-print("Number of colors: ", numColors)  # Displays the number of unique colors
-fh.close()  # Closes the file after reading
+    print("Number of columns: ", cols)  # Displays the number of columns in the image
+    print("Number of rows: ", rows)  # Displays the number of rows in the image
+    print("Number of colors: ", numColors)  # Displays the number of unique colors
+    fh.close()  # Closes the file after reading
+    
+except:
+    print("Please enter a valid filename. The file directory you entered has an error")
