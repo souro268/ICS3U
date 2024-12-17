@@ -92,3 +92,26 @@ word = ['BUNCH', 'CHIME', 'WHILE', 'SPURT']
 print(bubble_sort_recur(num, i, j, n, word))
 
 
+--------------- BUBBLE SORT --------------------------
+def bubble_sort_recursive(arr, n=None):
+    # Initialize n as the length of the array for the first call
+    if n is None:
+        n = len(arr)
+    
+    # Base case: If the array size is 1, it is already sorted
+    if n == 1:
+        return
+    
+    # Perform one pass of the bubble sort
+    for i in range(n - 1):
+        if arr[i] > arr[i + 1]:
+            # Swap if the element is greater than the next
+            arr[i], arr[i + 1] = arr[i + 1], arr[i]
+    
+    # Recursive call for the remaining array (excluding the last element)
+    bubble_sort_recursive(arr, n - 1)
+
+# Example usage
+numbers = [64, 34, 25, 12, 22, 11, 90]
+bubble_sort_recursive(numbers)
+print("Sorted array:", numbers)
