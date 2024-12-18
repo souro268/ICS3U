@@ -28,58 +28,83 @@ def mergeData(month, date, year):
     return year + month + date
     
     
-def merge_sort(num_arr, word_arr):
-    if len(num_arr) <= 1:
-        return num_arr, word_arr
+def merge(arr, arr2, left, mid, right):
+    
+    n1 = mid - left + 1
+    n2 = right - mid
 
-    mid = len(num_arr) // 2
-    left_num, left_word = merge_sort(num_arr[:mid], word_arr[:mid])
-    right_num, right_word = merge_sort(num_arr[mid:], word_arr[mid:])
+    # Create temp arrays
+    L = [0] * n1
+    L2 = [0] * n1
+    R = [0] * n2
+    R2 = [0] * n2
 
-    i = j = 0
-    sorted_num_arr = []
-    sorted_word_arr = []
+    # Copy data to temp arrays L[] and R[]
+    for i in range(n1):
+        L[i] = arr[left + i]
+        L2[i] = arr2[left + i]
+    for j in range(n2):
+        R[j] = arr[mid + 1 + j]
+        R2[j] = arr2[mid + 1 + j]
 
-    while i < len(left_num) and j < len(right_num):
-        if left_num[i] <= right_num[j]:
-            sorted_num_arr.append(left_num[i])
-            sorted_word_arr.append(left_word[i])
+    i = 0  # Initial index of first subarray
+    j = 0  # Initial index of second subarray
+    k = left  # Initial index of merged subarray
+
+    # Merge the temp arrays back
+    # into arr[left..right]
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            arr2[k] = L2[i]
             i += 1
         else:
-            sorted_num_arr.append(right_num[j])
-            sorted_word_arr.append(right_word[j])
+            arr[k] = R[j]
+            arr2[k] = R2[j]
             j += 1
+        k += 1
 
-    sorted_num_arr.extend(left_num[i:])
-    sorted_word_arr.extend(left_word[i:])
-    sorted_num_arr.extend(right_num[j:])
-    sorted_word_arr.extend(right_word[j:])
+    # Copy the remaining elements of L[],
+    # if there are any
+    while i < n1:
+        arr[k] = L[i]
+        arr2[k] = L2[i]
+        i += 1
+        k += 1
 
-    # add the data to dictionary
-    return sorted_num_arr, sorted_word_arr
+    # Copy the remaining elements of R[], 
+    # if there are any
+    while j < n2:
+        arr[k] = R[j]
+        arr2[k] = R2[j]
+        j += 1
+        k += 1
+
+def merge_sort(arr, arr2, left, right):
+    if left < right:
+        mid = (left + right) // 2
+
+        merge_sort(arr, arr2, left, mid)
+        merge_sort(arr, arr2, mid + 1, right)
+        merge(arr, arr2, left, mid, right)
 
 
-def Seach_by_Date(Input_year, Input_month, Input_date):
-    
-    found_date = None 
-    found_word = None
+def binarySearch(arr, low, high, x):
+    while low <= high:
+        mid = low + (high - low) // 2
+        if arr[mid] == x:
+            return mid
+        elif int(arr[mid]) < x:
+            low = mid + 1
+        else:
+            high = mid - 1
+    return -1
 
-    found_num = mergeData(Input_month, Input_date, Input_year)
-    temp = found_date
-    for keys, values in My_dic.items():
-        if values == found_num:   
-            found_date = values
-            found_word = keys
-            break
-    if found_word is not None:
-        return found_date, found_num, temp
-    else:
-        temp2, found_date = list(My_dic.items())[-1]
-        return None, found_date, temp
-    
-filename = 'wordle.txt'
-fh = open(filename, "r")  
 
+filename = 'wordle.dat'
+fh = open(filename, "r")          
+num_arr = []
+word_arr = []
 My_dic = {}
 Data_arr = [' ']*1038
 for i in range(1038):
@@ -88,9 +113,7 @@ for i in range(1038):
     month, date, year, word = tempvar.split(' ')
     myData = mergeData(month, date, year)
     Data_arr[i] = myData + ' ' + word
-    
-num_arr = []
-word_arr = []
+
 
 for i in range(len(Data_arr)):
     Data_arr[i].strip()
@@ -98,25 +121,35 @@ for i in range(len(Data_arr)):
     num_arr.append(num)
     word_arr.append(My_word)
 
-merge_sort(num_arr, word_arr)
-print(f"{num_arr} + {word_arr}")
+
+
 print("Welcome to the Wordle Database!")
 n = 0
 
 while n == 0:
     userInput = input("Enter w if you are looking for a word, or d for a word on a certain date: ")
     if userInput.lower() == 'd':
+        merge_sort(num_arr, word_arr, 0, len(num_arr) - 1)
+        print(num_arr)
+        print(word_arr)
         Input_year = input("Enter the year: ")
         Input_month = input("Enter the month (3-letter abbreviation, as in 'Jan' for 'January'): ")
         Input_date = input("Enter the day: ")
-        found_date, found_word, temp = Seach_by_Date(Input_year, Input_month, Input_date)
-        if found_word is not None:
-            print(f"The word entered on {found_date} was {found_word}.")
-        else:
-            print(f"{temp} is too early. No wordles occurred before {found_word}. Enter a later date.")
-    
+        x = mergeData(month, date, year)
+        x = int(x)    
+#         if x <= 20210619:
+#             print(f"{x} is too early. No wordles occurred before 20210619. Enter a later date.")
+#         elif x >= 20240421:
+#             print(f"{x} is too early. No wordles occurred before 20240421. Enter a ealier date.")
+        result = binarySearch(num_arr, 0, len(num_arr)-1, x)
+        print(f"The word entered on {num_arr[result]} was found {word_arr[result]}.")
+    if userInput.lower() == 'w':
+        merge_sort(word_arr, num_arr, 0, len(word_arr) - 1)
+        
     if userInput.lower() == 'exit':
         n = 1
+
+    
     
 
 
