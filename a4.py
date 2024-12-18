@@ -1,5 +1,13 @@
 
 '''
+To-Do
+- fix the num_arr and word_arr, they seem to be the same array. prob some indexing or swaping error
+- fix seaching for word/date
+- add num and word into dictionary 
+- variable dictionary
+- 
+
+
 Oct 01 2023 BERET
 Oct 02 2023 MERRY
 Oct 03 2023 WHILE
@@ -91,7 +99,7 @@ for i in range(len(Data_arr)):
     word_arr.append(My_word)
 
 merge_sort(num_arr, word_arr)
-    # print(Data_arr)
+print(f"{num_arr} + {word_arr}")
 print("Welcome to the Wordle Database!")
 n = 0
 
