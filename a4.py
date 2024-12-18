@@ -20,102 +20,96 @@ def mergeData(month, date, year):
     return year + month + date
     
     
+def merge_sort(num_arr, word_arr):
+    if len(num_arr) <= 1:
+        return num_arr, word_arr
+
+    mid = len(num_arr) // 2
+    left_num, left_word = merge_sort(num_arr[:mid], word_arr[:mid])
+    right_num, right_word = merge_sort(num_arr[mid:], word_arr[mid:])
+
+    i = j = 0
+    sorted_num_arr = []
+    sorted_word_arr = []
+
+    while i < len(left_num) and j < len(right_num):
+        if left_num[i] <= right_num[j]:
+            sorted_num_arr.append(left_num[i])
+            sorted_word_arr.append(left_word[i])
+            i += 1
+        else:
+            sorted_num_arr.append(right_num[j])
+            sorted_word_arr.append(right_word[j])
+            j += 1
+
+    sorted_num_arr.extend(left_num[i:])
+    sorted_word_arr.extend(left_word[i:])
+    sorted_num_arr.extend(right_num[j:])
+    sorted_word_arr.extend(right_word[j:])
+
+    # add the data to dictionary
+    return sorted_num_arr, sorted_word_arr
+
+
+def Seach_by_Date(Input_year, Input_month, Input_date):
     
-def bubble_sort_recursive(num, word_arr):
+    found_date = None 
+    found_word = None
+
+    found_num = mergeData(Input_month, Input_date, Input_year)
+    temp = found_date
+    for keys, values in My_dic.items():
+        if values == found_num:   
+            found_date = values
+            found_word = keys
+            break
+    if found_word is not None:
+        return found_date, found_num, temp
+    else:
+        temp2, found_date = list(My_dic.items())[-1]
+        return None, found_date, temp
     
-    for i in range(len(num)-1):
-        if num[i] > num[i + 1]:
-            temp = num[i]
-            num[i] = num[i+1]
-            num[i+1] = temp
-            
-            temp1 = word_arr[i]
-            word_arr[i] = word_arr[i+1]
-            word_arr[i+1] = temp1
-    return
-    
-    
-filename = 'wordle.dat'
-fh = open(filename, "r")  # Opens the file in read mode
-num = ['']*1038
-word_arr = ['']*1038
+filename = 'wordle.txt'
+fh = open(filename, "r")  
+
+My_dic = {}
+Data_arr = [' ']*1038
 for i in range(1038):
     tempvar = fh.readline()
     tempvar.strip()
     month, date, year, word = tempvar.split(' ')
     myData = mergeData(month, date, year)
-    num[i] = str(myData)
-    word_arr[i] = str(word)
+    Data_arr[i] = myData + ' ' + word
     
-    bubble_sort_recursive(num, word_arr)
-#print(Data_Arr)
+num_arr = []
+word_arr = []
+
+for i in range(len(Data_arr)):
+    Data_arr[i].strip()
+    num, My_word = Data_arr[i].split(' ')
+    num_arr.append(num)
+    word_arr.append(My_word)
+
+merge_sort(num_arr, word_arr)
+    # print(Data_arr)
+print("Welcome to the Wordle Database!")
+n = 0
+
+while n == 0:
+    userInput = input("Enter w if you are looking for a word, or d for a word on a certain date: ")
+    if userInput.lower() == 'd':
+        Input_year = input("Enter the year: ")
+        Input_month = input("Enter the month (3-letter abbreviation, as in 'Jan' for 'January'): ")
+        Input_date = input("Enter the day: ")
+        found_date, found_word, temp = Seach_by_Date(Input_year, Input_month, Input_date)
+        if found_word is not None:
+            print(f"The word entered on {found_date} was {found_word}.")
+        else:
+            print(f"{temp} is too early. No wordles occurred before {found_word}. Enter a later date.")
     
-dec{monkey}
+    if userInput.lower() == 'exit':
+        n = 1
+    
 
 
-
-'''
-Oct 01 2023 BERET
-Oct 02 2023 MERRY
-Oct 03 2023 WHILE
-Oct 04 2023 SPURT
-Oct 05 2023 BUNCH
-Oct 06 2023 CHIME
-20231006-CHIME
-'''
-def mergeData(month, date, year):
-    month = month.lower()
-    montharr = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
-    year_arr = []
-    for i in range(len(montharr)):
-        if month == montharr[i]:
-            month = str(i + 1)
-    if int(month) < 10:
-        month = '0' + month
-    return year + month + date
-    
-    
-    
-def bubble_sort_recursive(num, word_arr):
-    
-    for i in range(len(num)-1):
-        if num[i] > num[i + 1]:
-            temp = num[i]
-            num[i] = num[i+1]
-            num[i+1] = temp
             
-            temp1 = word_arr[i]
-            word_arr[i] = word_arr[i+1]
-            word_arr[i+1] = temp1
-    return
-    
-    
-filename = 'wordle.dat'
-fh = open(filename, "r")  # Opens the file in read mode
-num = ['']*1038
-word_arr = ['']*1038
-for i in range(1038):
-    tempvar = fh.readline()
-    tempvar.strip()
-    month, date, year, word = tempvar.split(' ')
-    myData = mergeData(month, date, year)
-    num[i] = str(myData)
-    word_arr[i] = str(word)
-    
-    bubble_sort_recursive(num, word_arr)
-#print(Data_Arr)
-    
-    
-d = {'one':1,'three':3,'five':5,'two':2,'four':4}
-a = sorted(d.items(), key=lambda x: x[1]) print(a)
-
-
-
-
-
-
-
-
-
-
-
