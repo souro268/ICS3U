@@ -1,29 +1,68 @@
 
-'''
-To-Do
-- do binary seach for word
-- format the print statments and make it look good
-- test multiple cases
 
+def User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n):
+    
+    while n == 0:
+        userInput = input("Enter w if you are looking for a word, or d for a word on a certain date: ")
+        if userInput.lower() == 'd':
+            merge_sort(num_arr, word_arr, 0, len(num_arr) - 1)
+            
+            Input_year = input("Enter the year: ")
+            if not Input_year.isdigit():
+                print("Please enter a valid year and try again.\n")
+                User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
+            Input_month = input("Enter the month (3-letter abbreviation, as in 'Jan' for 'January'): ")
+            if len(Input_month) > 3 or len(Input_month) < 3:
+                print("Please enter a valid month abbreviation and try again.\n")
+                User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
+            Input_date = input("Enter the day: ")
+            if not Input_date.isdigit():
+                print("Please enter a valid date and try again.\n")
+                User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
+            if int(Input_date) < 10:
+                Input_date = '0' + Input_date
+            x = mergeData(Input_month, Input_date, Input_year)
+            x = int(x)   
+            result = binary_search(num_arr,0, len(num_arr)-1, x)
+            if result is not None:
+                print(f"The word '{word_arr[result]}' was found at position {num_arr[result]}.\n")
+            else:
+                if(x < 20210619):
+                    print(f"{x} is too early. No wordles occurred before 20210619. Enter a later date.\n")
+                if(x > 20240421):
+                    print(f"{x} is too late. No wordles occurred after 20240421. Enter a earlier date.\n")                
+                
+        if userInput.lower() == 'w':
+            merge_sort(word_arr, num_arr, 0, len(word_arr) - 1)
+            Input_word = input("What word are you looking for? ")
+            Input_word = Input_word.upper()
+            result = binary_search(word_arr,0, len(word_arr)-1, Input_word)
+            if result is not None:
+                print(f"The word {word_arr[result]} was the solution to the puzzle on {num_arr[result]}\n")
+            if result is None:
+                print(f"{Input_word} was not found in the database.\n")
+            
+        if userInput.lower() == 'exit':
+            print("Thank you for using this program.\n")
+            n = 1
+        if not userInput.lower() == 'w' and not userInput.lower() == 'd' and not userInput.lower() == 'exit':
+            print("Please try again and use a valid input.\n")
+            User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
 
-Oct 01 2023 BERET
-Oct 02 2023 MERRY
-Oct 03 2023 WHILE
-Oct 04 2023 SPURT
-Oct 05 2023 BUNCH
-Oct 06 2023 CHIME
-20231006-CHIME
-'''
 def mergeData(month, date, year):
     month = month.lower()
-    montharr = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+    month_arr = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
     year_arr = []
-    for i in range(len(montharr)):
-        if month == montharr[i]:
-            month = str(i + 1)
-    if int(month) < 10:
-        month = '0' + month
-    return year + month + date
+    try:
+        for i in range(len(month_arr)):
+            if month == month_arr[i]:
+                month = str(i + 1)
+        if int(month) < 10:
+            month = '0' + month
+        return year + month + date
+    except:
+        print("Please enter a valid month and try again.\n")
+        User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
     
     
 def merge(arr, arr2, left, mid, right):
@@ -87,22 +126,23 @@ def merge_sort(arr, arr2, left, right):
         merge(arr, arr2, left, mid, right)
 
 
-def binary_search(arr, x):
-    low, high = 0, len(arr) - 1
-
-    while low <= high:
-        mid = low + (high - low) // 2
+def binary_search(arr, low, high, x):
+ 
+    # Check base case
+    if high >= low:
+        mid = (high + low) // 2
         if arr[mid] == x:
-            print(f"PRINT TARGET {mid}")
             return mid
-        if arr[mid] < x: 
-            low = mid + 1
+        elif arr[mid] > x:
+            return binary_search(arr, low, mid - 1, x)
         else:
-            high = mid - 1
-        print(mid)
-    return None 
+            return binary_search(arr, mid + 1, high, x)
+    else:
+        return None
 
 
+            
+            
 filename = 'wordle.dat'
 fh = open(filename, "r")          
 num_arr = []
@@ -120,6 +160,7 @@ for i in range(len(Data_arr)):
     Data_arr[i].strip()
     num, My_word = Data_arr[i].split(' ')
     num = int(num)
+    My_word = My_word.strip()
     num_arr.append(num)
     word_arr.append(My_word)
 
@@ -127,39 +168,10 @@ for i in range(len(Data_arr)):
 
 print("Welcome to the Wordle Database!")
 n = 0
+User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n)
+fh.close()
 
-while n == 0:
-    userInput = input("Enter w if you are looking for a word, or d for a word on a certain date: ")
-    if userInput.lower() == 'd':
-        merge_sort(num_arr, word_arr, 0, len(num_arr) - 1)
-        Input_year = input("Enter the year: ")
-        Input_month = input("Enter the month (3-letter abbreviation, as in 'Jan' for 'January'): ")
-        Input_date = input("Enter the day: ")
-        if int(Input_date) < 10:
-            Input_date = '0' + Input_date
-        x = mergeData(Input_month, Input_date, Input_year)
-        x = int(x)   
-        result = binary_search(num_arr, x)
-        if result is not None:
-            print(f"The word '{word_arr[result]}' was found at position {num_arr[result]}.")
-        else:
-            print(f"{x} is too early. No wordles occurred before 20240421. Enter a ealier date.")
-    if userInput.lower() == 'w':
-        merge_sort(word_arr, num_arr, 0, len(word_arr) - 1)
-        Input_word = input("What word are you looking for? ")
-        Input_word = Input_word.upper()
-        Input_word = Input_word.strip()
-        result = binary_search(num_arr, Input_word)
-        if result is not None:
-            print(f"The word {My_word[result]} was the solution to the puzzle on {num_arr[result]}")
-        else:
-            print(f"{Input_word} was not found in the database.")
-        
-    if userInput.lower() == 'exit':
-        n = 1
-    # if not userInput == 'w' and not userInput == 'd' and not userInput == 'exit':
-    #     print('Please enter a valid input.')
-#Jun 29 2021 HEATH
+
     
     
 
