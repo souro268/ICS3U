@@ -89,25 +89,24 @@ def merge_sort(arr, arr2, left, right):
 
 def binary_search(arr, x):
     low, high = 0, len(arr) - 1
-    
+
     while low <= high:
         mid = low + (high - low) // 2
-        
-        # Ensure both values are strings for comparison
         if arr[mid] == x:
+            print(f"PRINT TARGET {mid}")
             return mid
-        elif arr[mid] < x:  # Lexicographic comparison works for number strings
+        if arr[mid] < x: 
             low = mid + 1
         else:
             high = mid - 1
-    
-    return None  # Return -1 if the element is not found
+        print(mid)
+    return None 
+
 
 filename = 'wordle.dat'
 fh = open(filename, "r")          
 num_arr = []
 word_arr = []
-My_dic = {}
 Data_arr = [' ']*1038
 for i in range(1038):
     tempvar = fh.readline()
@@ -140,10 +139,6 @@ while n == 0:
             Input_date = '0' + Input_date
         x = mergeData(Input_month, Input_date, Input_year)
         x = int(x)   
-#         if x <= 20210619:
-#             print(f"{x} is too early. No wordles occurred before 20210619. Enter a later date.")
-#         elif x >= 20240421:
-#             print(f"{x} is too early. No wordles occurred before 20240421. Enter a ealier date.")
         result = binary_search(num_arr, x)
         if result is not None:
             print(f"The word '{word_arr[result]}' was found at position {num_arr[result]}.")
@@ -152,15 +147,18 @@ while n == 0:
     if userInput.lower() == 'w':
         merge_sort(word_arr, num_arr, 0, len(word_arr) - 1)
         Input_word = input("What word are you looking for? ")
+        Input_word = Input_word.upper()
+        Input_word = Input_word.strip()
         result = binary_search(num_arr, Input_word)
         if result is not None:
             print(f"The word {My_word[result]} was the solution to the puzzle on {num_arr[result]}")
         else:
             print(f"{Input_word} was not found in the database.")
         
-        
     if userInput.lower() == 'exit':
         n = 1
+    # if not userInput == 'w' and not userInput == 'd' and not userInput == 'exit':
+    #     print('Please enter a valid input.')
 #Jun 29 2021 HEATH
     
     
