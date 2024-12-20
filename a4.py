@@ -1,9 +1,10 @@
 
-
 def User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n):
     
     while n == 0:
-        userInput = input("Enter w if you are looking for a word, or d for a word on a certain date: ")
+        print("****************************************************************************************************")
+        print("Enter 'w' if you are looking for a word, 'd' if seaching by date and 'exit' to exit the program.")
+        userInput = input("Enter your option: ")
         if userInput.lower() == 'd':
             merge_sort(num_arr, word_arr, 0, len(num_arr) - 1)
             
@@ -13,11 +14,11 @@ def User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n):
                 User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
             Input_month = input("Enter the month (3-letter abbreviation, as in 'Jan' for 'January'): ")
             if len(Input_month) > 3 or len(Input_month) < 3:
-                print("Please enter a valid month abbreviation and try again.\n")
+                print("Please enter a valid month abbreviation and try again.")
                 User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
             Input_date = input("Enter the day: ")
             if not Input_date.isdigit():
-                print("Please enter a valid date and try again.\n")
+                print("Please enter a valid date and try again.")
                 User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
             if int(Input_date) < 10:
                 Input_date = '0' + Input_date
@@ -25,12 +26,15 @@ def User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n):
             x = int(x)   
             result = binary_search(num_arr,0, len(num_arr)-1, x)
             if result is not None:
-                print(f"The word '{word_arr[result]}' was found at position {num_arr[result]}.\n")
+                print(f"The word '{word_arr[result]}' was the solution to the puzzle on {num_arr[result]}.")
+                print("****************************************************************************************************")
             else:
                 if(x < 20210619):
-                    print(f"{x} is too early. No wordles occurred before 20210619. Enter a later date.\n")
+                    print(f"{x} is too early. No wordles occurred before 20210619. Enter a later date.")
+                    print("****************************************************************************************************")
                 if(x > 20240421):
-                    print(f"{x} is too late. No wordles occurred after 20240421. Enter a earlier date.\n")                
+                    print(f"{x} is too late. No wordles occurred after 20240421. Enter a earlier date.")
+                    print("****************************************************************************************************")
                 
         if userInput.lower() == 'w':
             merge_sort(word_arr, num_arr, 0, len(word_arr) - 1)
@@ -38,15 +42,19 @@ def User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n):
             Input_word = Input_word.upper()
             result = binary_search(word_arr,0, len(word_arr)-1, Input_word)
             if result is not None:
-                print(f"The word {word_arr[result]} was the solution to the puzzle on {num_arr[result]}\n")
+                print(f"The word {word_arr[result]} was the solution to the puzzle on {num_arr[result]}")
+                print("****************************************************************************************************")
             if result is None:
-                print(f"{Input_word} was not found in the database.\n")
+                print(f"{Input_word} was not found in the database.")
+                print("****************************************************************************************************")
             
         if userInput.lower() == 'exit':
-            print("Thank you for using this program.\n")
-            n = 1
+            print("Thank you for using this program.")
+            print("****************************************************************************************************")
+            return None
         if not userInput.lower() == 'w' and not userInput.lower() == 'd' and not userInput.lower() == 'exit':
-            print("Please try again and use a valid input.\n")
+            print("Please try again and use a valid input.")
+            print("****************************************************************************************************")
             User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
 
 def mergeData(month, date, year):
@@ -61,7 +69,7 @@ def mergeData(month, date, year):
             month = '0' + month
         return year + month + date
     except:
-        print("Please enter a valid month and try again.\n")
+        print("Please enter a valid month and try again.")
         User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
     
     
@@ -142,34 +150,45 @@ def binary_search(arr, low, high, x):
 
 
             
-            
-filename = 'wordle.dat'
-fh = open(filename, "r")          
-num_arr = []
-word_arr = []
-Data_arr = [' ']*1038
-for i in range(1038):
-    tempvar = fh.readline()
-    tempvar.strip()
-    month, date, year, word = tempvar.split(' ')
-    myData = mergeData(month, date, year)
-    Data_arr[i] = myData + ' ' + word
 
 
-for i in range(len(Data_arr)):
-    Data_arr[i].strip()
-    num, My_word = Data_arr[i].split(' ')
-    num = int(num)
-    My_word = My_word.strip()
-    num_arr.append(num)
-    word_arr.append(My_word)
+try:
+    filename = 'wordle.dat'
+    fh = open(filename, "r")
+    num_arr = []
+    word_arr = []
+    Data_arr = [' ']*1038
+    for i in range(1038):
+        tempvar = fh.readline()
+        tempvar.strip()
+        try:
+            month, date, year, word = tempvar.split(' ')
+        except:
+            print("There is some error with the wordle data in the file. Please try again. ")
+        myData = mergeData(month, date, year)
+        Data_arr[i] = myData + ' ' + word
 
 
+    for i in range(len(Data_arr)):
+        Data_arr[i].strip()
+        num, My_word = Data_arr[i].split(' ')
+        num = int(num)
+        My_word = My_word.strip()
+        num_arr.append(num)
+        word_arr.append(My_word)
 
-print("Welcome to the Wordle Database!")
-n = 0
-User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n)
-fh.close()
+
+    print("****************************************************************************************************")
+    print("Welcome to the Wordle Database!")
+    n = 0
+    User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n)
+    fh.close()
+except OSError as err:
+    print("OS error:", err)
+except ValueError:
+    print("Error with converting data to int, please try again.")
+except Exception as err:
+    print(f"Unexpected {err=}, {type(err)=}")
 
 
     
