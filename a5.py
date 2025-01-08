@@ -1,71 +1,16 @@
-
-def User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n):
-    # Main user interaction loop for searching by word or date.
-    while n == 0:
-        print("****************************************************************************************************")
-        print("Enter 'w' if you are looking for a word, 'd' if searching by date, and 'exit' to exit the program.")
-        userInput = input("Enter your option: ")
-        
-        if userInput.lower() == 'd':
-            # Sorting by date before binary search
-            merge_sort(num_arr, word_arr, 0, len(num_arr) - 1)
-            
-            Input_year = input("Enter the year: ")
-            if not Input_year.isdigit():
-                print("Please enter a valid year and try again.\n")
-                User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
-            
-            Input_month = input("Enter the month (3-letter abbreviation, e.g., 'Jan' for 'January'): ")
-            if len(Input_month) > 3 or len(Input_month) < 3:
-                print("Please enter a valid month abbreviation and try again.")
-                User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
-            
-            Input_date = input("Enter the day: ")
-            if not Input_date.isdigit():
-                print("Please enter a valid date and try again.")
-                User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
-            
-            if int(Input_date) < 10:
-                # Padding single-digit dates with a leading zero
-                Input_date = '0' + Input_date
-            
-            # Merging user input into YYYYMMDD format
-            x = mergeData(Input_month, Input_date, Input_year)
-            x = int(x)   
-            result = binary_search(num_arr, 0, len(num_arr) - 1, x)
-            
-            if result is not None:
-                print(f"The word '{word_arr[result]}' was the solution to the puzzle on {num_arr[result]}.")
-            else:
-                if x < 20210619:
-                    print(f"{x} is too early. No Wordles occurred before 20210619. Enter a later date.")
-                if x > 20240421:
-                    print(f"{x} is too late. No Wordles occurred after 20240421. Enter an earlier date.")
-            print("****************************************************************************************************")
-        
-        elif userInput.lower() == 'w':
-            # Sorting by word before binary search
-            merge_sort(word_arr, num_arr, 0, len(word_arr) - 1)
-            Input_word = input("What word are you looking for? ").upper()
-            result = binary_search(word_arr, 0, len(word_arr) - 1, Input_word)
-            
-            if result is not None:
-                print(f"The word {word_arr[result]} was the solution to the puzzle on {num_arr[result]}")
-            else:
-                print(f"{Input_word} was not found in the database.")
-            print("****************************************************************************************************")
-        
-        elif userInput.lower() == 'exit':
-            print("Thank you for using this program.")
-            print("****************************************************************************************************")
-            return None
-        
-        else:
-            # Invalid input handling
-            print("Please try again and use a valid input.")
-            print("****************************************************************************************************")
-            User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
-
+def Date(Exp_Mo, Exp_Yr):
+    Exp_Yr = str(Exp_Yr)
+    month = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
+    for x in month:
+        if Exp_Mo < 10:     
+            if Exp_Mo == x:
+                Exp_Mo = str(Exp_Mo)
+                Exp_Mo = '0' + Exp_Mo
+                return Exp_Yr + Exp_Mo
+        if Exp_Mo >= 10:
+            Exp_Mo = str(Exp_Mo)
+            return Exp_Yr + Exp_Mo
+    
 def mergeData(month, date, year):
     # Converts month, day, and year into a single YYYYMMDD string.
     month = month.lower()
@@ -82,16 +27,24 @@ def mergeData(month, date, year):
         print("Please enter a valid month and try again.")
         User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, 0)
 
-def merge(arr, arr2, left, mid, right):
+
+
+def merge(arr, arr2, arr3, arr4, arr5, left, right):
     # Merges two sorted subarrays into a single sorted array.
     n1 = mid - left + 1
     n2 = right - mid
-    L, L2 = [0] * n1, [0] * n1  # Temporary arrays for left subarray
-    R, R2 = [0] * n2, [0] * n2  # Temporary arrays for right subarray
+    L, L2, L3, L4, L5 = [0] * n1, [0] * n1, [0] * n1, [0] * n1, [0] * n1  # Temporary arrays for left subarray
+    R, R2, R3, R4, R5 = [0] * n2, [0] * n2, [0] * n2, [0] * n2, [0] * n2  # Temporary arrays for right subarray
+    
     
     for i in range(n1):
         L[i] = arr[left + i]
         L2[i] = arr2[left + i]
+        L3[i] = arr3[left + i]
+        L4[i] = arr4[left + i]
+        L5[i] = arr5[left + i]       
+        
+        
     for j in range(n2):
         R[j] = arr[mid + 1 + j]
         R2[j] = arr2[mid + 1 + j]
@@ -117,68 +70,55 @@ def merge(arr, arr2, left, mid, right):
         j += 1
         k += 1
 
-def merge_sort(arr, arr2, left, right):
+
+
+def merge_sort(arr, arr2, arr3, arr4, arr5, left, right):
     # Recursively sorts the array using the merge sort algorithm.
     if left < right:
         mid = (left + right) // 2
-        merge_sort(arr, arr2, left, mid)
-        merge_sort(arr, arr2, mid + 1, right)
-        merge(arr, arr2, left, mid, right)
+        merge_sort(arr, arr2, arr3, arr4, arr5, left, right)
+        merge_sort(arr, arr2, arr3, arr4, arr5, left, right)
+        merge(arr, arr2, arr3, arr4, arr5, left, right)
+    #  
+    
+filename = 'data.dat'  # The name of the file containing Wordle data
+fh = open(filename, "r")  # Opens the file for
 
-def binary_search(arr, low, high, x):
-    # Searches for x in a sorted array using binary search.
-    if high >= low:
-        mid = (high + low) // 2
-        if arr[mid] == x:
-            return mid
-        elif arr[mid] > x:
-            return binary_search(arr, low, mid - 1, x)
-        else:
-            return binary_search(arr, mid + 1, high, x)
-    else:
-        return None
+FirstNameArr = []
+LastNameArr = []
+CCtypeArr = []
+CCNumber = []
+DateArr = []
+n = 1
 
 
 
-try:
-    filename = 'wordle.dat'  # The name of the file containing Wordle data
-    fh = open(filename, "r")  # Opens the file for reading
-    num_arr = []  # List to store puzzle dates in YYYYMMDD format
-    word_arr = []  # List to store Wordle solutions
-    Data_arr = [' '] * 1038  # Initializes array to store raw file data for 1038 entries
 
-    for i in range(1038):  # Loops through each line in the file
+Temp_File_Line = fh.readline() # reads GivenName,Surname,CCType,CCNumber,Exp-Mo,Exp-Yr 
+while n == 1:  # Loops through each line in the file
+    try:
         tempvar = fh.readline()  # Reads one line from the file
-        tempvar.strip()  # Removes any leading/trailing whitespace
-        try:
-            # Splits the line into month, date, year, and word
-            month, date, year, word = tempvar.split(' ')
-        except:
-            print("There is some error with the Wordle data in the file. Please try again.")
-            continue  # Skips the faulty line and continues with the next iteration
-        # Converts the month, date, and year into a single YYYYMMDD format string
-        myData = mergeData(month, date, year)
-        # Combines the formatted date with the word
-        Data_arr[i] = myData + ' ' + word
+    except:
+        print("There is an error with reading the file. Please try again. ")
+        n = 0
+    tempvar.strip()  # Removes any leading/trailing whitespace
+    try:
+        First_Name, Last_Name, CC_Type, CC_Number, Exp_Mo, Exp_Yr = tempvar.split(',')
+        FirstNameArr.append(First_Name)
+        LastNameArr.append(Last_Name)
+        CCtypeArr.append(CC_Type)
+        CCNumber.append(CC_Number)
+        DateArr.append(Date(Exp_Mo, Exp_Yr))       
+        
+        
+    except ValueError:
+        n = 0
+    except Exception as err:  # Handles any other unexpected errors
+        print(f"There has been an error. Error message: {err=}. Error type: {type(err)=}")
+        n = 0
+merge_sort(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber,  0, len(DateArr) - 1)
 
-    for i in range(len(Data_arr)):  # Processes formatted data
-        Data_arr[i].strip()  # Removes leading/trailing whitespace from each entry
-        # Splits each entry into date (num) and word
-        num, My_word = Data_arr[i].split(' ')
-        num = int(num)  # Converts date to integer format
-        My_word = My_word.strip()  # Removes any extra whitespace from the word
-        num_arr.append(num)  # Appends the date to num_arr
-        word_arr.append(My_word)  # Appends the word to word_arr
+        
+        
+    
 
-    print("****************************************************************************************************")
-    print("Welcome to the Wordle Database!")  # Welcome message
-    n = 0  # Initializes the control variable for User_Inputs function
-    # Calls the main user interaction function
-    User_Inputs(num_arr, word_arr, mergeData, merge_sort, binary_search, n)
-    fh.close()  # Closes the file after processing
-except OSError as err:  # Handles file-related errors
-    print("OS error:", err)
-except ValueError:  # Handles data conversion errors
-    print("Error with converting data to int, please try again.")
-except Exception as err:  # Handles any other unexpected errors
-    print(f"Unexpected {err=}, {type(err)=}")
