@@ -14,9 +14,24 @@ def Date(Exp_Mo, Exp_Yr):
 merge_sort(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber,  0, len(DateArr) - 1)
 def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
     for x in range(len(DataArr)):
-        if DataArr[x] <= 202501:
-            print(f"{FirstNameArr[x]} {LastNameArr[x]}: ")
+        if DataArr[x] < 202501:
+            if(CCtypeArr[x] == 'Visa'):
+                print(f"{FirstNameArr[x]} {LastNameArr[x]}:     Visa         {CCNumber[x]} {DateArr[x]} EXPIRED")
+            if(CCtype[x] == 'MasterCard'):
+                print(f"{FirstNameArr[x]} {LastNameArr[x]}:    MasterCard   {CCNumber[x]} {DateArr[x]} EXPIRED")
+        if DataArr[x] == 202501:
+            if(CCtypeArr[x] == 'Visa'):
+                print(f"{FirstNameArr[x]} {LastNameArr[x]}:     Visa         {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
+            if(CCtype[x] == 'MasterCard'):
+                print(f"{FirstNameArr[x]} {LastNameArr[x]}:    MasterCard   {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
+        if(DataArr[x] > 202501):
+            if(CCtypeArr[x] == 'Visa'):
+                print(f"{FirstNameArr[x]} {LastNameArr[x]}:     Visa         {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
+            if(CCtype[x] == 'MasterCard'):
+                print(f"{FirstNameArr[x]} {LastNameArr[x]}:    MasterCard   {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
             
+            
+        
             Barbara Hadley:     Visa         #4532415491630710 202205 EXPIRED
             
 
