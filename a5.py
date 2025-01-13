@@ -11,28 +11,19 @@ def Date(Exp_Mo, Exp_Yr):
         if Exp_Mo >= 10:
             Exp_Mo = str(Exp_Mo)
             return Exp_Yr + Exp_Mo
-merge_sort(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber,  0, len(DateArr) - 1)
+
 def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
-    for x in range(len(DataArr)):
-        if DataArr[x] < 202501:
-            if(CCtypeArr[x] == 'Visa'):
-                print(f"{FirstNameArr[x]} {LastNameArr[x]}:     Visa         {CCNumber[x]} {DateArr[x]} EXPIRED")
-            if(CCtype[x] == 'MasterCard'):
-                print(f"{FirstNameArr[x]} {LastNameArr[x]}:    MasterCard   {CCNumber[x]} {DateArr[x]} EXPIRED")
-        if DataArr[x] == 202501:
-            if(CCtypeArr[x] == 'Visa'):
-                print(f"{FirstNameArr[x]} {LastNameArr[x]}:     Visa         {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
-            if(CCtype[x] == 'MasterCard'):
-                print(f"{FirstNameArr[x]} {LastNameArr[x]}:    MasterCard   {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
-        if(DataArr[x] > 202501):
-            if(CCtypeArr[x] == 'Visa'):
-                print(f"{FirstNameArr[x]} {LastNameArr[x]}:     Visa         {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
-            if(CCtype[x] == 'MasterCard'):
-                print(f"{FirstNameArr[x]} {LastNameArr[x]}:    MasterCard   {CCNumber[x]} {DateArr[x]} RENEW IMMEDIATELY")
-            
-            
+    for x in range(len(DateArr)):
+        if DateArr[x] < 202501:
+            variable = "%s %s:     %-13s %s %s EXPIRED" % (FirstNameArr[x], LastNameArr[x], CCtypeArr[x], CCNumber[x], DateArr[x])
+            FileWrite.write(variable + '\n')
+        if DateArr[x] == 202501:
+            variable = "%s %s:     %-13s %s %s RENEW IMMEDIATELY" % (FirstNameArr[x], LastNameArr[x], CCtypeArr[x], CCNumber[x], DateArr[x])
+            FileWrite.write(variable + '\n')
+        if DateArr[x] > 202501:
+            variable = "%s %s:     %-13s %s %s" % (FirstNameArr[x], LastNameArr[x], CCtypeArr[x], CCNumber[x], DateArr[x])
+            FileWrite.write(variable + '\n')
         
-            Barbara Hadley:     Visa         #4532415491630710 202205 EXPIRED
             
 
 def merge(arr, arr2, arr3, arr4, arr5, left, mid, right):
@@ -99,6 +90,8 @@ def merge_sort(arr, arr2, arr3, arr4, arr5, left, right):
 filename = 'data.dat'  # The name of the file containing Wordle data
 fh = open(filename, "r")  # Opens the file for
 
+FileNameWriting = 'COMPSCI_FILE.txt'
+FileWrite = open(FileNameWriting, 'w')
 FirstNameArr = []
 LastNameArr = []
 CCtypeArr = []
@@ -133,8 +126,9 @@ while n == 1:  # Loops through each line in the file
         print(f"There has been an error. Error message: {err=}. Error type: {type(err)=}")
         n = 0
 merge_sort(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber,  0, len(DateArr) - 1)
-Comparison()
+Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber) 
 
         
         
-    
+fh.close()
+FileWrite.close()
