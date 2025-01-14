@@ -25,7 +25,7 @@ def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
             Status = ' NOT EXPIRED'
             FileWrite.write(variable + Status + '\n')
     print("You sorting is done! Please open the file called 'COMPUTER_SCIENCE_GR_11_FILE.txt' on you computer.")
-            
+    
 
 def merge(arr, arr2, arr3, arr4, arr5, left, mid, right):
     # Merges two sorted subarrays into a single sorted array.
@@ -93,6 +93,7 @@ fh = open(filename, "r")  # Opens the file for
 
 FileNameWriting = 'COMPUTER_SCIENCE_GR_11_FILE.txt'
 FileWrite = open(FileNameWriting, 'w')
+
 FirstNameArr = []
 LastNameArr = []
 CCtypeArr = []
@@ -126,9 +127,7 @@ while n == 1:  # Loops through each line in the file
         print(f"There has been an error. Error message: {err=}. Error type: {type(err)=}")
         n = 0
 merge_sort(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber,  0, len(DateArr) - 1)
-Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber) 
-
-        
+Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber)         
         
 fh.close()
 FileWrite.close()
