@@ -14,16 +14,17 @@ def Date(Exp_Mo, Exp_Yr):
 
 def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
     for x in range(len(DateArr)):
+        variable = "%-35s\t%-13s %s %s" % (FirstNameArr[x] + ' ' + LastNameArr[x] + ':', CCtypeArr[x], '#' + CCNumber[x], DateArr[x])
         if DateArr[x] < 202501:
-            variable = "%s %s:     %-13s %s %s EXPIRED" % (FirstNameArr[x], LastNameArr[x], CCtypeArr[x], CCNumber[x], DateArr[x])
-            FileWrite.write(variable + '\n')
+            Status = ' EXPIRED'
+            FileWrite.write(variable + Status + '\n')
         if DateArr[x] == 202501:
-            variable = "%s %s:     %-13s %s %s RENEW IMMEDIATELY" % (FirstNameArr[x], LastNameArr[x], CCtypeArr[x], CCNumber[x], DateArr[x])
-            FileWrite.write(variable + '\n')
+            Status = ' RENEW IMMEDIATELY'
+            FileWrite.write(variable + Status + '\n')
         if DateArr[x] > 202501:
-            variable = "%s %s:     %-13s %s %s" % (FirstNameArr[x], LastNameArr[x], CCtypeArr[x], CCNumber[x], DateArr[x])
-            FileWrite.write(variable + '\n')
-        
+            Status = ' NOT EXPIRED'
+            FileWrite.write(variable + Status + '\n')
+    print("You sorting is done! Please open the file called 'COMPUTER_SCIENCE_GR_11_FILE.txt' on you computer.")
             
 
 def merge(arr, arr2, arr3, arr4, arr5, left, mid, right):
@@ -90,7 +91,7 @@ def merge_sort(arr, arr2, arr3, arr4, arr5, left, right):
 filename = 'data.dat'  # The name of the file containing Wordle data
 fh = open(filename, "r")  # Opens the file for
 
-FileNameWriting = 'COMPSCI_FILE.txt'
+FileNameWriting = 'COMPUTER_SCIENCE_GR_11_FILE.txt'
 FileWrite = open(FileNameWriting, 'w')
 FirstNameArr = []
 LastNameArr = []
@@ -117,8 +118,7 @@ while n == 1:  # Loops through each line in the file
         CCtypeArr.append(CC_Type.strip())
         CCNumber.append(CC_Number.strip())
         temp = Date(Exp_Mo, Exp_Yr.strip())
-        DateArr.append(temp)       
-        
+        DateArr.append(temp)
         
     except ValueError:
         n = 0
