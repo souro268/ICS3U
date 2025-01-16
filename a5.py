@@ -25,7 +25,7 @@ def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
         if DateArr[x] > 202501:
             Status = ' NOT EXPIRED'
             FileWrite.write(variable + Status + '\n')
-    print(f"You sorting is done! Please open the file called '{FileNameWriting}' on you computer.")
+    print(f"You sorting is done! Please open the file called '{FileNameWriting}' on you computer to view the output! :D")
     
 
 def merge(arr, arr2, arr3, arr4, arr5, left, mid, right):
