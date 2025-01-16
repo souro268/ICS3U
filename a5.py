@@ -14,7 +14,8 @@ def Date(Exp_Mo, Exp_Yr):
 
 def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
     for x in range(len(DateArr)):
-        variable = "%-35s\t%-13s %s %s" % (FirstNameArr[x] + ' ' + LastNameArr[x] + ':', CCtypeArr[x], '#' + CCNumber[x], DateArr[x])
+        Total_Name = FirstNameArr[x] + ' ' + LastNameArr[x] + ':'
+        variable = "%-35s\t%-13s %s %s" % (Total_Name, CCtypeArr[x], '#' + CCNumber[x], DateArr[x])
         if DateArr[x] < 202501:
             Status = ' EXPIRED'
             FileWrite.write(variable + Status + '\n')
@@ -24,7 +25,7 @@ def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
         if DateArr[x] > 202501:
             Status = ' NOT EXPIRED'
             FileWrite.write(variable + Status + '\n')
-    print("You sorting is done! Please open the file called 'COMPUTER_SCIENCE_GR_11_FILE.txt' on you computer.")
+    print(f"You sorting is done! Please open the file called '{FileNameWriting}' on you computer.")
     
 
 def merge(arr, arr2, arr3, arr4, arr5, left, mid, right):
@@ -33,8 +34,8 @@ def merge(arr, arr2, arr3, arr4, arr5, left, mid, right):
         arr[x] = int(arr[x])
     n1 = mid - left + 1
     n2 = right - mid
-    L, L2, L3, L4, L5 = [0] * n1, [0] * n1, [0] * n1, [0] * n1, [0] * n1  # Temporary arrays for left subarray
-    R, R2, R3, R4, R5 = [0] * n2, [0] * n2, [0] * n2, [0] * n2, [0] * n2  # Temporary arrays for right subarray
+    L, L2, L3, L4, L5 = [0] * n1, [0] * n1, [0] * n1, [0] * n1, [0] * n1
+    R, R2, R3, R4, R5 = [0] * n2, [0] * n2, [0] * n2, [0] * n2, [0] * n2
     
     
     for i in range(n1):
@@ -91,7 +92,7 @@ def merge_sort(arr, arr2, arr3, arr4, arr5, left, right):
 filename = 'data.dat'  # The name of the file containing Wordle data
 fh = open(filename, "r")  # Opens the file for
 
-FileNameWriting = 'COMPUTER_SCIENCE_GR_11_FILE.txt'
+FileNameWriting = 'Soted_data.txt'
 FileWrite = open(FileNameWriting, 'w')
 
 FirstNameArr = []
