@@ -1,3 +1,5 @@
+#CCC '02 J2 - AmeriCanadian
+
 def add(arr2):
     temp = ''
     for x in range(len(arr2)):
