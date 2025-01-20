@@ -57,9 +57,7 @@ def Comparison(DateArr, FirstNameArr, LastNameArr, CCtypeArr, CCNumber):
         if DateArr[x] == 202501:  # Check if the card needs immediate renewal.
             Status = ' RENEW IMMEDIATELY'  # Mark card for immediate renewal.
             FileWrite.write(variable + Status + '\n')  # Write details to file.
-        if DateArr[x] > 202501:  # Check if the card is still valid.
-            Status = ' NOT EXPIRED'  # Mark card as not expired.
-            FileWrite.write(variable + Status + '\n')  # Write details to file.
+        
     # Inform the user that sorting is complete.
     print(f"You sorting is done! Please open the file called '{FileNameWriting}' on you computer to view the output! :D")
 
