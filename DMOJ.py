@@ -1,10 +1,3 @@
-#CCC '02 J2 - AmeriCanadian
-
-def add(arr2):
-    temp = ''
-    for x in range(len(arr2)):
-        temp = temp + arr2[x]
-    return temp
 
 n = 0
 arr = []
@@ -16,27 +9,22 @@ while n == 0:
         n = 1
     else:
         arr.append(temp)
-        
-        
-for x in range(len(arr)):
 
+
+for x in range(len(arr)):
     if len(arr[x]) > 4:
         temp = arr[x]
-        for i in range(len(temp)):
-            arr2.append(temp[i])
-        for y in range(len(temp)):
-            if arr2[y] == 'o' and arr2[y+1] == 'r':
-                for i in range(len(v)):
-                    if not arr2[y-1] == v[i]:
-                        arr.pop
-                        arr.pop
-                        arr2.append('our')
-                        arr[x] = add(arr2)
-                        
-                        
+        for i in range(len(arr[x])):
+            if temp[i] == 'o' and temp[i+1] == 'r':
+                if not temp[i-1] in v:
+                    temp2 = temp[:(i+1)]
+                    temp = temp2 + 'ur' + temp[i+2:]
+                    arr[x] = temp 
+            else:
+                pass
     else:
         pass
-
-
-print(arr)
+for x in arr:
+    print(x)
         
+
