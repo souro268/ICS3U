@@ -19,12 +19,12 @@ for x in range(len(arr)):
                 if not temp[i-1] in v:
                     temp2 = temp[:(i+1)]
                     temp = temp2 + 'ur' + temp[i+2:]
-                    arr[x] = temp 
+                    arr[x] = temp
+            if temp[i] == 'o' and temp[i+1] == 'u' and temp[i+2] == 'r':
+                 pass
             else:
                 pass
     else:
         pass
 for x in arr:
     print(x)
-        
-
