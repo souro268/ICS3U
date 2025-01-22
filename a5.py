@@ -1,24 +1,23 @@
 # Sourish Keshari 904147
 # ICS 3U
 
-
 # Variable Dictionary:
-# Exp_Mo: The expiration month of a credit card (integer or string input).
-# Exp_Yr: The expiration year of a credit card (string input).
-# month: A list of integers representing months (1 to 12).
-# DateArr: List of expiration dates in YYYYMM format for credit cards.
-# FirstNameArr: List of first names of cardholders.
-# LastNameArr: List of last names of cardholders.
-# CCtypeArr: List of credit card types (e.g., Visa, MasterCard).
-# CCNumber: List of credit card numbers.
-# Total_Name: Concatenation of a cardholder's first and last name.
+# Exp_Mo: Expiration month of a credit card (int or string input).
+# Exp_Yr: Expiration year of a credit card (string input).
+# month: List of integers representing months (1 to 12).
+# DateArr: Expiration dates in YYYYMM format for credit cards.
+# FirstNameArr: First names of cardholders.
+# LastNameArr: Last names of cardholders.
+# CCtypeArr: Credit card types (e.g., Visa, MasterCard).
+# CCNumber: Credit card numbers.
+# Total_Name: Full name of a cardholder (first + last name).
 # Status: Status of a credit card (EXPIRED, RENEW IMMEDIATELY, NOT EXPIRED).
-# FileNameWriting: Name of the output file for sorted credit card data.
-# FileWrite: File handle used to write output data.
-# L, L2, L3, L4, L5: Temporary subarrays for the left half during merge sort.
-# R, R2, R3, R4, R5: Temporary subarrays for the right half during merge sort.
-# n1, n2: Sizes of the left and right subarrays in merge sort.
-# left, mid, right: Indices used for dividing and merging in merge sort.
+# FileNameWriting: Name of the file for sorted credit card data.
+# FileWrite: File handle for writing output data.
+# L, L2, L3, L4, L5: Temp subarrays for left half during merge sort.
+# R, R2, R3, R4, R5: Temp subarrays for right half during merge sort.
+# n1, n2: Sizes of left and right subarrays in merge sort.
+# left, mid, right: Indices for splitting and merging in merge sort.
 
 def Date(Exp_Mo, Exp_Yr):
     """
